@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Eiser {% endblock %}
+{% block content %}
+
+<section class="banner_area">
+  <div class="banner_inner d-flex align-items-center">
+    <div class="container">
+      <div
+        class="banner_content d-md-flex justify-content-between align-items-center"
+      >
+        <div class="mb-3 mb-md-0">
+          <h2>Product Checkout</h2>
+          <p>Very us move be blessed multiply night</p>
+        </div>
+        <div class="page_link">
+          <a href="index.html">Home</a>
+          <a href="checkout.html">Product Checkout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+  <div class="container">
+    <div class="returning_customer">
+
+    <div class="billing_details">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2>Billing Details</h2>
+          <form
+            class=" order_form"
+            action=""
+            method="post">
+            {{ form|crispy }}
+            <p><input class="btn" style="background-color:#71cd14; color: white;" type="submit" value="Place order"></p>
+            {% csrf_token %}
+          </form>
+
+
+
+        </div>
+        <div class="col-lg-4">
+          <div class="order_box">
+            <h2>Your Order</h2>
+            <ul class="list">
+              <li>
+                <a href="#"
+                  >Product
+                  <span>Total</span>
+                </a>
+              </li>
+              {% for item in cart %}
+              <li>
+                <a href="{{ item.product.get_absolute_url }}"
+                  >{{ item.product.name }}
+                  <span class="last">${{ item.total_price }} </span>
+                </a>
+              </li>
+              {% endfor %}
+
+            </ul>
+            <ul class="list list_2">
+              <li>
+                <a href="#"
+                  >Subtotal
+                  <span>${{ cart.get_total_price }}</span>
+                </a>
+              </li>
+              {% if cart.coupon %}
+              <li>
+                <a href="#"
+                  >  "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+                  <span class="last">- ${{ cart.get_discount|floatformat:"2" }}</span>
+                </a>
+
+              </li>
+              {% endif %}
+
+              <li>
+                <a href="#"
+                  >Total
+                  <span>${{ cart.get_total_price_after_discount|floatformat:"2" }}</span>
+                </a>
+              </li>
+            </ul>
+            <div class="payment_item">
+              <div class="radion_btn">
+                <input type="radio" id="f-option5" name="selector" />
+                <label for="f-option5">Check payments</label>
+                <div class="check"></div>
+              </div>
+              <p>
+                Please send a check to Store Name, Store Street, Store Town,
+                Store State / County, Store Postcode.
+              </p>
+            </div>
+            <div class="payment_item active">
+              <div class="radion_btn">
+                <input type="radio" id="f-option6" name="selector" />
+                <label for="f-option6">Paypal </label>
+                <img src="{% static 'img/product/single-product/card.jpg' %}" alt="" />
+                <div class="check"></div>
+              </div>
+              <p>
+                Please send a check to Store Name, Store Street, Store Town,
+                Store State / County, Store Postcode.
+              </p>
+            </div>
+            <div class="creat_account">
+              <input type="checkbox" id="f-option4" name="selector" />
+              <label for="f-option4">I’ve read and accept the </label>
+              <a href="#">terms & conditions*</a>
+            </div>
+            <a class="main_btn" href="#">Proceed to Paypal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

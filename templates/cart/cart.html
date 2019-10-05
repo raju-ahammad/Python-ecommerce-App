@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Eiser {% endblock %}
+{% block content %}
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+  <div class="banner_inner d-flex align-items-center">
+    <div class="container">
+      <div
+        class="banner_content d-md-flex justify-content-between align-items-center"
+      >
+        <div class="mb-3 mb-md-0">
+          <h2>Cart</h2>
+          <p>Very us move be blessed multiply night</p>
+        </div>
+        <div class="page_link">
+          <a href="{% url 'home' %}">Home</a>
+          <a href="#">Cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+  <div class="container">
+    <div class="cart_inner">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart %}
+            {% with product=item.product %}
+            <tr>
+              <td>
+                <div class="media">
+                  <div class="d-flex">
+                    <a href="{{ item.product.get_absolute_url }}">
+                      <img style="height: 78px; width:110px;"
+                        src="{% if product.image %}{{ product.image.url }} {% endif %}"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <a href="{{ item.product.get_absolute_url }}"><p>{{ product.name }}</p></a>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <h5>${{ product.price }}</h5>
+              </td>
+              <td>
+                <form class="" action="{% url 'cart_add' product.id %}" method="post">
+                  {% csrf_token %}
+                  {{ item.update_quantity_form.quantity }}
+                  {{ item.update_quantity_form.update }}
+                  <input class="btn btn-warning ml-2" type="submit" name="" value="Update">
+                </form>
+              </td>
+              <td>
+                <h5>${{ item.total_price }}</h5>
+              </td>
+              <td><a class="btn btn-danger" href="{% url "cart_remove" product.id %}">Remove</a></td>
+            </tr>
+            {% endwith %}
+          {% endfor %}
+
+            {% if cart.coupon %}
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <h5>Subtotal</h5>
+              </td>
+              <td>
+                <h5>${{ cart.get_total_price }}</h5>
+              </td>
+            </tr>
+            <tr class="shipping_area">
+              <td></td>
+              <td></td>
+              <td>
+                "{{ cart.coupon.code }}" coupon
+                ({{ cart.coupon.discount }}% off)
+              </td>
+              <td>
+                - ${{ cart.get_discount|floatformat:"2" }}
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <h5>Subtotal</h5>
+              </td>
+              <td>
+                <h5>${{ cart.get_total_price }}</h5>
+              </td>
+            </tr>
+
+            {% endif %}
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <h5>Total</h5>
+              </td>
+              <td>
+              <h5>${{ cart.get_total_price_after_discount|floatformat:"2" }}</h5>
+              </td>
+            </tr>
+
+            <tr class="out_button_area">
+              <td></td>
+              <td></td>
+              <td>
+                <div class="checkout_btn_inner ml-5">
+                  <a class="gray_btn" href="{% url 'shop' %}">Continue Shopping</a>
+                  <a class="main_btn" href="{% url 'order' %}">Proceed to checkout</a>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <tr>
+      <td><form action="{% url "apply" %}" method="post">
+        {{ coupon_apply_form }}
+        <input class="btn btn-warning ml-2" type="submit" name="" value="Apply">
+        {% csrf_token %}
+      </form></td>
+    </tr>
+  </div>
+
+</section>
+<!--================End Cart Area =================-->
+
+{% endblock %}
