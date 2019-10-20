@@ -5,6 +5,38 @@ from django.db.models import Q
 from django.urls import reverse
 
 
+
+
+
+class ProductQueryset(models.query.QuerySet):
+    def featured(self):
+        return self.filter(featured=True, active=True)
+
+    def active(self):
+        return self.filter(active=True)
+
+    def search(self, query):
+        looksup = Q(name__contains=query) | Q(description__contains=query) | Q(price__contains=query)
+        return self.filter(looksup).distinct()
+
+
+
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return ProductQueryset(self.model, using=self._db)
+
+    def all(self):
+        return self.get_queryset().active()
+
+
+
+    def active(self):
+        return self.get_queryset().active()
+
+    def search(self, query):
+        return self.get_queryset().active().search(query)
+
+
 class Category(models.Model):
     MENS_JEANS      = 'Mens Jeans'
     MENS_TSHIRT     = 'Mens Tshirt'
@@ -74,6 +106,8 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("detail", kwargs={'slug': self.slug})
+
+    objects = ProductManager()
 
 
 class ProductImage(models.Model):

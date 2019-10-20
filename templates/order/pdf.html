@@ -1,6 +1,6 @@
 <html>
 <body>
-  <h1>My Shop</h1>
+  <h1>Eiser</h1>
   <p>
     <br>Invoice no. {{ order.id }}</br>
     <span class="secondary">
@@ -37,7 +37,7 @@
       {% endfor %}
       {% if order.coupon %}
       <tr>
-        <td>"{{ order.coupon.code }}" ({{ order.coupon.discount }}% off)</td>
+        <td>"{{ order.coupon.code }}" ({{ order.coupon.cart.discount }}% off)</td>
         <td></td>
         <td></td>
         <td>- ${{ order.coupon.get_discount|floatformat:"2" }}</td>

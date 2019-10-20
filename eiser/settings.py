@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'coupons',
     'authenticate',
     'crispy_forms',
+    'search',
 
 ]
 

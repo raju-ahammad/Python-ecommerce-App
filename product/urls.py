@@ -13,6 +13,7 @@ urlpatterns = [
     path('detail/<slug:slug>', views.DetailProductView.as_view(), name= 'detail'),
     path('shop', views.ProductListView.as_view(), name='shop'),
     path('category/<int:pk>', views.CategoryView.as_view(), name='category'),
+    path('contact', views.contact, name='contact'),
 ]
 urlpatterns+=staticfiles_urlpatterns()
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

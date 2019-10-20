@@ -50,8 +50,8 @@
         <div class="row">
           <div class="col-lg-7">
             <div class="float-left">
-              <p>Phone: +01 256 25 235</p>
-              <p>email: info@eiser.com</p>
+              <p>Phone: 01722863302</p>
+              <p>email: web.rajuahammad@gmail.com</p>
             </div>
           </div>
           <div class="col-lg-5">
@@ -68,7 +68,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="contact.html">
+                  <a href="{% url 'contact' %}">
                     Contact Us
                   </a>
                 </li>
@@ -116,32 +116,16 @@
                   <li class="nav-item {% if request.path == blog_url %}active{% endif %}">
                     <a class="nav-link" href="{% url 'blog_home' %}">BLog</a>
                   </li>
-                  <li class="nav-item submenu dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false">Pages</a>
-                    <ul class="dropdown-menu">
-                      <li class="nav-item">
-                        <a class="nav-link" href="tracking.html">Tracking</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="elements.html">Elements</a>
-                      </li>
-                    </ul>
-                  </li>
+
                   <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                   </li>
                 </ul>
               </div>
-
               <div class="col-lg-5 pr-0">
                 <ul class="nav navbar-nav navbar-right right_nav pull-right">
-                  <li class="nav-item">
-                    <a href="#" class="icons">
-                      <i class="ti-search" aria-hidden="true"></i>
-                    </a>
-                  </li>
-                  
+
+
                   <li class="nav-item submenu dropdown">
                     <a href="#" class="nav-link dropdown-toggle icons" data-toggle="dropdown" role="button" aria-haspopup="true"
                       aria-expanded="false"> <i class="ti-user" aria-hidden="true"></i></a>
@@ -180,6 +164,7 @@
               </div>
             </div>
           </div>
+
         </nav>
       </div>
     </div>

@@ -62,3 +62,7 @@ class CategoryView(ListView):
         # Add in the category
         context['category'] = self.category
         return context
+
+
+def contact(request):
+    return render(request, 'product/contact.html')
