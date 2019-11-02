@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from .models import Product, Category, ProductImage
 from django.shortcuts import redirect
 from cart.forms import CartAddProductForm
-
+from blog.models import BlogPost
 
 class HomePageView(ListView):
     model   = Product
@@ -16,6 +16,7 @@ class HomePageView(ListView):
         context['featured'] = Product.objects.filter(featured=True).order_by('-created')[:3];
         context['inspired'] = Product.objects.filter(inspired=True).order_by('-created')[:8];
         context['new_product'] = Product.objects.filter(active=True).order_by('-created')[:4];
+        context['created']   = BlogPost.objects.order_by('-created')[:3];
         return context
 
 

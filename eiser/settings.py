@@ -155,19 +155,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-
-# Braintree settings
-BRAINTREE_MERCHANT_ID = 'f9cwcds3cckycjh5' # Merchant ID
-BRAINTREE_PUBLIC_KEY = 'kmzgcxtfz6nnm3cj' # Public Key
-BRAINTREE_PRIVATE_KEY = '224e49b332c5a70d53b33e29f01ce56e' # Private key
-
-
-from braintree import Configuration, Environment
-
-Configuration.configure(
-      Environment.Sandbox,
-      BRAINTREE_MERCHANT_ID,
-      BRAINTREE_PUBLIC_KEY,
-      BRAINTREE_PRIVATE_KEY
-)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')

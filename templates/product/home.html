@@ -11,10 +11,9 @@
       <div class="container">
         <div class="banner_content row">
           <div class="col-lg-12">
-            <p class="sub text-uppercase">men Collection</p>
             <h3><span>Show</span> Your <br />Personal <span>Style</span></h3>
             <h4>Fowl saw dry which a above together place.</h4>
-            <a class="main_btn mt-40" href="#">View Collection</a>
+            <a class="main_btn mt-40" href="{% url 'shop' %}">View Collection</a>
           </div>
         </div>
       </div>
@@ -124,8 +123,8 @@
       <div class="row justify-content-center">
         <div class="offset-lg-4 col-lg-6 text-center">
           <div class="offer_content">
-            <h3 class="text-uppercase mb-40">all men’s collection</h3>
-            <h2 class="text-uppercase">50% off</h2>
+            <h3 class="text-uppercase mb-40">all men collection</h3>
+            <h2 class="text-uppercase">10% off</h2>
             <a href="#" class="main_btn mb-20 mt-5">Discover Now</a>
             <p>Limited Time Offer</p>
           </div>
@@ -258,80 +257,30 @@
       </div>
 
       <div class="row">
+        {% for blog in created %}
         <div class="col-lg-4 col-md-6">
           <div class="single-blog">
             <div class="thumb">
-              <img class="img-fluid" src="{% static 'img/b1.jpg' %}" alt="">
+              <a href="{% url 'blog_detail' blog.pk %}"><img class="img-fluid" src="{{ blog.image.url }}" alt=""></a>
             </div>
             <div class="short_details">
               <div class="meta-top d-flex">
-                <a href="#">By Admin</a>
-                <a href="#"><i class="ti-comments-smiley"></i>2 Comments</a>
+                <a href="created#">By Admin</a>
+                <a href="#"><i class="ti-comments-smiley"></i>{{ blog.comments.count }} Comments</a>
               </div>
               <a class="d-block" href="single-blog.html">
-                <h4>Ford clever bed stops your sleeping
-                  partner hogging the whole</h4>
+                <a href="{% url 'blog_detail' blog.pk %}"><h4>{{ blog.title }}</h4></a>
               </a>
               <div class="text-wrap">
                 <p>
-                  Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light
-                  Forth.
+                {{ blog.body|truncatewords:15 }}
                 </p>
               </div>
-              <a href="#" class="blog_btn">Learn More <span class="ml-2 ti-arrow-right"></span></a>
             </div>
           </div>
         </div>
+        {% endfor %}
 
-        <div class="col-lg-4 col-md-6">
-          <div class="single-blog">
-            <div class="thumb">
-              <img class="img-fluid" src="{% static 'img/b2.jpg' %}" alt="">
-            </div>
-            <div class="short_details">
-              <div class="meta-top d-flex">
-                <a href="#">By Admin</a>
-                <a href="#"><i class="ti-comments-smiley"></i>2 Comments</a>
-              </div>
-              <a class="d-block" href="single-blog.html">
-                <h4>Ford clever bed stops your sleeping
-                  partner hogging the whole</h4>
-              </a>
-              <div class="text-wrap">
-                <p>
-                  Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light
-                  Forth.
-                </p>
-              </div>
-              <a href="#" class="blog_btn">Learn More <span class="ml-2 ti-arrow-right"></span></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="single-blog">
-            <div class="thumb">
-              <img class="img-fluid" src="{% static 'img/b3.jpg' %}" alt="">
-            </div>
-            <div class="short_details">
-              <div class="meta-top d-flex">
-                <a href="#">By Admin</a>
-                <a href="#"><i class="ti-comments-smiley"></i>2 Comments</a>
-              </div>
-              <a class="d-block" href="single-blog.html">
-                <h4>Ford clever bed stops your sleeping
-                  partner hogging the whole</h4>
-              </a>
-              <div class="text-wrap">
-                <p>
-                  Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light
-                  Forth.
-                </p>
-              </div>
-              <a href="#" class="blog_btn">Learn More <span class="ml-2 ti-arrow-right"></span></a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
