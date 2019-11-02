@@ -12,6 +12,8 @@ django-mathfilters = "*"
 django-crispy-forms = "*"
 django-weasyprint = "*"
 pillow = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.7"
