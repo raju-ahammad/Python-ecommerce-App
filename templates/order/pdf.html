@@ -37,10 +37,9 @@
       {% endfor %}
       {% if order.coupon %}
       <tr>
-        <td>"{{ order.coupon.code }}" ({{ order.coupon.cart.discount }}% off)</td>
+        <td>Coupons-{{ order.coupon.code }} 10% off</td>
         <td></td>
         <td></td>
-        <td>- ${{ order.coupon.get_discount|floatformat:"2" }}</td>
 
       </tr>
       {% endif %}
